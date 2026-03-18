@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security Symbols</title>
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #ffffff;
+        padding: 40px;
+        text-align: center;
+    }
+    h1 {
+        color: #0d3d6b;
+        margin-bottom: 40px;
+    }
+    .features {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        flex-wrap: wrap;
+    }
+    .feature {
+        width: 90px;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(145deg, #e6f2ff, #f8fbff);
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+        transition: transform 0.3s ease;
+    }
+    .feature:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+    }
+    .feature svg {
+        width: 40px;
+        height: 40px;
+        stroke-width: 2;
+    }
+    /* Individual icon colors */
+    .key svg { stroke: #f0db4f; fill: #f0db4f; }          /* JA3/JA3S - yellow */
+    .bar-chart-3 svg { stroke: #61dafb; fill: #61dafb; }  /* Packet/Flow Stats - blue */
+    .users svg { stroke: #ff6f61; fill: #ff6f61; }        /* UBA - coral */
+    .laptop svg { stroke: #4caf50; fill: #4caf50; }       /* Device Posture - green */
+    .shield svg { stroke: #f44336; fill: #f44336; }       /* EDR - red */
+</style>
+</head>
+<body>
+
+<h1>ZeroShield AI – Security Symbols</h1>
+
+<div class="features">
+    <div class="feature key"><i data-lucide="key"></i></div>
+    <div class="feature bar-chart-3"><i data-lucide="bar-chart-3"></i></div>
+    <div class="feature users"><i data-lucide="users"></i></div>
+    <div class="feature laptop"><i data-lucide="laptop"></i></div>
+    <div class="feature shield"><i data-lucide="shield"></i></div>
+</div>
+
+<!-- Load Lucide -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+
+</body>
+</html>

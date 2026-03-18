@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeroShield AI - Use Cases</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">ZeroShield AI <span style="font-size:1.3rem;">🛡️</span></div>
+            <ul class="nav-links">
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Dashboard.html">Dashboard</a></li>
+                <li><a href="Architecture.html">Architecture</a></li>
+                <li><a href="Comparison.html">Comparison</a></li>
+                <li><a href="Pricing.html">Pricing</a></li>
+                <li><a href="Docs.html">Docs</a></li>
+                 <li><a href="About.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="usecases">
+            <h1>Use Cases <span style="font-size:1.5rem;">💡</span></h1>
+            <div style="margin:2rem 0;text-align:center;">
+                <img src="usecase.png" alt="Use Case Flow Diagram" style="max-width:600px;width:100%;border-radius:12px;box-shadow:0 2px 12px #0097b233;">
+                <p style="margin-top:1rem;color:#005f6b;font-size:1.1rem;">ZeroShield AI Use Case Flow: Threats are detected, analyzed, and blocked in real time across multiple environments.</p>
+            </div>
+            <div class="usecase-list">
+                <div class="usecase-item">
+                    <h3>🏢 Enterprise Network Security</h3>
+                    <p>Protects large-scale networks from sophisticated cyber attacks.<br><b>Benefit:</b> Real-time monitoring, instant response, and compliance reporting.</p>
+                </div>
+                <div class="usecase-item">
+                    <h3>☁️ Cloud Infrastructure Protection</h3>
+                    <p>Secures cloud workloads and hybrid environments.<br><b>Benefit:</b> Unified security across AWS, Azure, GCP, and on-premises.</p>
+                </div>
+                <div class="usecase-item">
+                    <h3>🏠 Remote Workforce Security</h3>
+                    <p>Implements zero trust for remote employees and devices.<br><b>Benefit:</b> Secure access from anywhere, on any device.</p>
+                </div>
+                <div class="usecase-item">
+                    <h3>🔗 IoT Device Defense</h3>
+                    <p>Monitors and secures connected devices against emerging threats.<br><b>Benefit:</b> End-to-end protection for smart devices and sensors.</p>
+                </div>
+                <div class="usecase-item">
+                    <h3>🏥 Healthcare Data Security</h3>
+                    <p>Protects sensitive patient data and medical devices.<br><b>Benefit:</b> HIPAA compliance and privacy assurance.</p>
+                </div>
+                <div class="usecase-item">
+                    <h3>🏦 Financial Services Protection</h3>
+                    <p>Secures transactions, customer data, and regulatory compliance.<br><b>Benefit:</b> Prevents fraud and data breaches.</p>
+                </div>
+            </div>
+            <div style="margin:2rem 0;text-align:center;">
+                <h2 style="color:#0097b2;">Threats by Use Case</h2>
+                <canvas id="usecaseGraph" style="max-width:600px;margin:0 auto;"></canvas>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                const ctxUsecase = document.getElementById('usecaseGraph').getContext('2d');
+                new Chart(ctxUsecase, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Enterprise','Cloud','Remote','IoT','Healthcare','Finance'],
+                        datasets: [{
+                            label: 'Threats Detected',
+                            data: [32, 27, 18, 22, 15, 19],
+                            backgroundColor: '#0097b2',
+                            borderRadius: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true } }
+                    }
+                });
+            </script>
+            <div class="usecase-extra" style="margin-top:2rem;">
+                <h2>Industry Solutions <span style="font-size:1.2rem;">🌍</span></h2>
+                <div style="display:flex;gap:2rem;flex-wrap:wrap;">
+                    <div style="flex:1 1 220px;background:#e3f6f9;border-radius:8px;padding:1rem;box-shadow:0 1px 6px #0097b233;">
+                        <b>Education</b><br>Protects student data and campus networks.</div>
+                    <div style="flex:1 1 220px;background:#e3f6f9;border-radius:8px;padding:1rem;box-shadow:0 1px 6px #0097b233;">
+                        <b>Retail</b><br>Secures POS systems and customer information.</div>
+                    <div style="flex:1 1 220px;background:#e3f6f9;border-radius:8px;padding:1rem;box-shadow:0 1px 6px #0097b233;">
+                        <b>Government</b><br>Ensures data sovereignty and critical infrastructure protection.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 ZeroShield AI. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

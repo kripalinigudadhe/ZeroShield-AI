@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZeroShield AI - Simulation Center</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Simulation Page Specific Styles */
+    body { background:#f7f9fa; color:#222; font-family:'DM Sans', Arial, sans-serif; }
+    .container { max-width:1000px; margin:2rem auto; padding:1rem; }
+    section { background:#fff; padding:2rem; margin-bottom:2rem; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+    h2 { color:#0097b2; margin-bottom:1.5rem; text-align:center; }
+    .form-group { display:flex; flex-wrap:wrap; gap:1rem; margin-bottom:1rem; justify-content:center; }
+    .form-group input, .form-group select, .form-group button {
+      padding:0.6rem 1rem; border-radius:8px; border:1px solid #ccc; font-size:1rem;
+    }
+    .form-group input, .form-group select { flex:1 1 150px; min-width:150px; }
+    .form-group button { background:#0097b2; color:white; border:none; cursor:pointer; flex:1 1 120px; }
+    .form-group button:hover { background:#007288; }
+    #simulationResult { margin-top:1rem; text-align:center; font-weight:600; font-size:1.1rem; }
+    .packet-list { max-height:300px; overflow-y:auto; border-top:1px solid #ddd; margin-top:1rem; padding-top:1rem; }
+    .packet-list li { padding:0.5rem; border-bottom:1px solid #eee; border-radius:5px; margin-bottom:0.3rem; }
+    .status-safe { color:green; font-weight:600; }
+    .status-malicious { color:red; font-weight:600; }
+    canvas { max-width:400px; margin:2rem auto; display:block; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar (Same as Home) -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">ZeroShield AI<span style="font-size:1.8rem;">🛡️</span></div>
+      <ul class="nav-links">
+        <li><a href="Home.html">Home</a></li>
+        <li><a href="Dashboard.html">Dashboard</a></li>
+        <li><a href="Architecture.html">Architecture</a></li>
+        <li><a href="Comparison.html">Comparison</a></li>
+        <li><a href="Docs.html">Docs</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="simulation.html" class="active">Simulation</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <section>
+      <h2>Simulation Center 🖥️</h2>
+      <p style="text-align:center; margin-bottom:2rem;">
+        Enter custom network packet details and see dynamic threat analysis in real-time!
+      </p>
+
+      <!-- Input Form -->
+      <div class="form-group">
+        <input type="text" id="srcIP" placeholder="Source IP (e.g., 192.168.1.10)">
+        <input type="text" id="dstIP" placeholder="Destination IP (e.g., 10.0.0.5)">
+        <select id="protocol">
+          <option value="HTTP">HTTP</option>
+          <option value="HTTPS">HTTPS</option>
+          <option value="FTP">FTP</option>
+          <option value="SSH">SSH</option>
+        </select>
+        <input type="number" id="size" placeholder="Packet Size (bytes)">
+        <button onclick="simulatePacket()">Simulate</button>
+      </div>
+
+      <p id="simulationResult">No packet simulated yet.</p>
+
+      <!-- Packet History List -->
+      <ul id="packetHistory" class="packet-list"></ul>
+
+      <!-- Protocol Chart -->
+      <canvas id="protocolChart" width="400" height="200"></canvas>
+    </section>
+  </div>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    // ------------------ Data ------------------
+    let protocolCounts = {HTTP:0, HTTPS:0, FTP:0, SSH:0};
+
+    const ctx = document.getElementById('protocolChart').getContext('2d');
+    const protocolChart = new Chart(ctx, {
+      type:'doughnut',
+      data: {
+        labels: Object.keys(protocolCounts),
+        datasets:[{
+          label:'Protocol Traffic',
+          data:Object.values(protocolCounts),
+          backgroundColor:['#FF6384','#36A2EB','#FFCE56','#8BC34A']
+        }]
+      },
+      options:{ responsive:true, plugins:{ legend:{ position:'bottom' } } }
+    });
+
+    // ------------------ Simulation Function ------------------
+    function simulatePacket() {
+      const src = document.getElementById('srcIP').value || `192.168.1.${Math.floor(Math.random()*255)}`;
+      const dst = document.getElementById('dstIP').value || `10.0.0.${Math.floor(Math.random()*255)}`;
+      const protocol = document.getElementById('protocol').value;
+      const size = parseInt(document.getElementById('size').value) || Math.floor(Math.random()*1500);
+
+      const status = (size > 1200) ? "Malicious" : "Safe";
+
+      // Update Chart
+      protocolCounts[protocol]++;
+      protocolChart.data.datasets[0].data = Object.values(protocolCounts);
+      protocolChart.update();
+
+      // Update Result
+      const resultText = `Packet ${src} → ${dst} | ${protocol} | ${size} bytes is ${status}`;
+      const resultEl = document.getElementById('simulationResult');
+      resultEl.textContent = resultText;
+      resultEl.className = status === "Safe" ? "status-safe" : "status-malicious";
+
+      // Add to History
+      const li = document.createElement('li');
+      li.textContent = resultText;
+      li.className = status === "Safe" ? "status-safe" : "status-malicious";
+      document.getElementById('packetHistory').prepend(li);
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeroShield AI - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .dashboard-main { max-width: 1200px; margin: 2rem auto; padding: 2rem; background: #fff; border-radius: 18px; box-shadow: 0 2px 24px #0097b233; }
+        .dashboard-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+        .dashboard-header h1 { color: #0097b2; font-size: 2.2rem; }
+        .dashboard-cards { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+        .dashboard-card { flex: 1 1 220px; background: #e3f6f9; border-radius: 12px; box-shadow: 0 2px 12px #0097b233; padding: 1.5rem; text-align: left; }
+        .dashboard-graphs { display: flex; gap: 2rem; flex-wrap: wrap; }
+        .dashboard-graph { flex: 1 1 400px; background: #fffbe6; border-radius: 12px; box-shadow: 0 2px 12px #0097b233; padding: 1.5rem; }
+        .dashboard-ai { margin-top: 2rem; background: #e3f6f9; border-radius: 12px; box-shadow: 0 2px 12px #0097b233; padding: 1.5rem; }
+        .dashboard-ai textarea { width: 100%; border-radius: 8px; border: 1px solid #c2e9f2; padding: 0.7rem; margin-bottom: 1rem; }
+        .dashboard-ai button { width: 100%; font-size: 1.1rem; }
+        .dashboard-ai-response { margin-top: 1rem; background: #fff; border-radius: 8px; padding: 1rem; box-shadow: 0 1px 6px #0097b233; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">ZeroShield AI <span style="font-size:1.3rem;">🛡️</span></div>
+            <ul class="nav-links">
+               <li><a href="Home.html">Home</a></li>
+                <li><a href="Dashboard.html">Dashboard</a></li>
+                <li><a href="Architecture.html">Architecture</a></li>
+                <li><a href="Comparison.html">Comparison</a></li>
+                <li><a href="Pricing.html">Pricing</a></li>
+                <li><a href="Docs.html">Docs</a></li>
+                 <li><a href="About.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="dashboard-main">
+            <div class="dashboard-header">
+                <h1>Security Dashboard</h1>
+                <span style="font-size:1.5rem;">🔒</span>
+            </div>
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <h3>Threats Detected (24h)</h3>
+                    <p id="threatsCount" style="font-size:2rem;color:#0097b2;font-weight:bold;">0</p>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Blocked Attacks</h3>
+                    <p id="blockedCount" style="font-size:2rem;color:#0097b2;font-weight:bold;">0</p>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Active Devices</h3>
+                    <p id="devicesCount" style="font-size:2rem;color:#0097b2;font-weight:bold;">0</p>
+                </div>
+            </div>
+            <div class="dashboard-graphs">
+                <div class="dashboard-graph">
+                    <h3>Threats Over Time</h3>
+                    <canvas id="threatsChart"></canvas>
+                </div>
+                <div class="dashboard-graph">
+                    <h3>Attack Types</h3>
+                    <canvas id="attackTypeChart"></canvas>
+                </div>
+            </div>
+            <div class="dashboard-ai">
+                <h3>Ask ZeroShield AI <span style="font-size:1.2rem;">🤖</span></h3>
+                <textarea id="aiQuery" rows="3" placeholder="Type your security question..."></textarea>
+                <button onclick="askAI()" class="cta-btn">Ask AI</button>
+                <div id="aiResponse" class="dashboard-ai-response" style="display:none;"></div>
+            </div>
+            
+        </div>
+        
+    </main>
+    <footer>
+        <p>&copy; 2025 ZeroShield AI. All rights reserved.</p>
+    </footer>
+    <script>
+        // Simulated dashboard data
+        document.getElementById('threatsCount').textContent = Math.floor(Math.random()*100+50);
+        document.getElementById('blockedCount').textContent = Math.floor(Math.random()*80+20);
+        document.getElementById('devicesCount').textContent = Math.floor(Math.random()*30+10);
+
+        // Threats Over Time Graph
+        const ctxThreats = document.getElementById('threatsChart').getContext('2d');
+        new Chart(ctxThreats, {
+            type: 'line',
+            data: {
+                labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+                datasets: [{
+                    label: 'Threats',
+                    data: [12, 19, 7, 14, 22, 18, 9],
+                    backgroundColor: 'rgba(0,151,178,0.2)',
+                    borderColor: '#0097b2',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#0097b2',
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Attack Type Graph
+        const ctxAttack = document.getElementById('attackTypeChart').getContext('2d');
+        new Chart(ctxAttack, {
+            type: 'doughnut',
+            data: {
+                labels: ['Malware','Phishing','DDoS','Ransomware','Other'],
+                datasets: [{
+                    label: 'Attack Types',
+                    data: [15, 10, 7, 5, 3],
+                    backgroundColor: [
+                        '#0097b2', '#00c6ff', '#005f6b', '#e3f6f9', '#fffbe6'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+
+        // Simple AI functionality (simulated)
+        function askAI() {
+            const query = document.getElementById('aiQuery').value.trim();
+            const responseDiv = document.getElementById('aiResponse');
+            if (!query) {
+                responseDiv.style.display = 'block';
+                responseDiv.textContent = 'Please enter a question.';
+                return;
+            }
+            responseDiv.style.display = 'block';
+            responseDiv.textContent = 'Analyzing your question...';
+            setTimeout(() => {
+                // Simulated AI response
+                if (query.toLowerCase().includes('ransomware')) {
+                    responseDiv.textContent = 'ZeroShield AI recommends isolating affected devices and running a full scan. Ransomware attacks are blocked in real time.';
+                } else if (query.toLowerCase().includes('phishing')) {
+                    responseDiv.textContent = 'Phishing attempts are detected using AI pattern recognition. Educate users and enable email filtering.';
+                } else if (query.toLowerCase().includes('devices')) {
+                    responseDiv.textContent = 'Active devices are monitored for unusual behavior. ZeroShield AI can automatically quarantine suspicious devices.';
+                } else {
+                    responseDiv.textContent = 'ZeroShield AI is always learning. For your query, we recommend reviewing analytics and enabling all security modules.';
+                }
+            }, 1200);
+        }
+    </script>
+</body>
+</html>

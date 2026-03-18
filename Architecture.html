@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeroShield AI - Architecture</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">ZeroShield AI <span style="font-size:1.3rem;">🛡️</span></div>
+            <ul class="nav-links">
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Dashboard.html">Dashboard</a></li>
+                <li><a href="Architecture.html">Architecture</a></li>
+                <li><a href="Comparison.html">Comparison</a></li>
+                <li><a href="Pricing.html">Pricing</a></li>
+                <li><a href="Docs.html">Docs</a></li>
+                 <li><a href="About.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="architecture">
+            <h1>Architecture <span style="font-size:1.5rem;">🏗️</span></h1>
+            <div class="arch-info">
+                <p><b>ZeroShield AI</b> leverages state-of-the-art AI models, real-time analytics, and zero trust principles to deliver robust security across networks and endpoints.</p>
+                <div class="arch-cards" style="display:flex;gap:2rem;flex-wrap:wrap;margin-top:2rem;">
+                    <div style="flex:1 1 220px;background:#e3f6f9;border-radius:8px;padding:1rem;box-shadow:0 1px 6px #0097b233;">
+                        <h3>🤖 AI Threat Detection Engine</h3>
+                        <p>Analyzes traffic and behaviors to spot threats instantly.</p>
+                    </div>
+                    <div style="flex:1 1 220px;background:#e3f6f9;border-radius:8px;padding:1rem;box-shadow:0 1px 6px #0097b233;">
+                        <h3>🔒 Policy Enforcement Module</h3>
+                        <p>Applies dynamic security policies based on context.</p>
+                    </div>
+                    <div style="flex:1 1 220px;background:#e3f6f9;border-radius:8px;padding:1rem;box-shadow:0 1px 6px #0097b233;">
+                        <h3>📊 Analytics & Reporting Dashboard</h3>
+                        <p>Visualizes threats, compliance, and trends in real time.</p>
+                    </div>
+                    <div style="flex:1 1 220px;background:#e3f6f9;border-radius:8px;padding:1rem;box-shadow:0 1px 6px #0097b233;">
+                        <h3>🔗 Integration Layer</h3>
+                        <p>Connects with cloud, on-prem, and hybrid environments.</p>
+                    </div>
+                    <div style="flex:1 1 220px;background:#e3f6f9;border-radius:8px;padding:1rem;box-shadow:0 1px 6px #0097b233;">
+                        <h3>🛡️ Zero Trust Access Control</h3>
+                        <p>Ensures only verified users and devices access resources.</p>
+                    </div>
+                </div>
+                <div style="margin-top:2rem;background:#fffbe6;border-radius:8px;padding:1.2rem;box-shadow:0 1px 6px #0097b233;">
+                    <h3>🌐 Scalability & Reliability</h3>
+                    <p>Built for high availability, auto-scaling, and disaster recovery.</p>
+                </div>
+                <div style="margin-top:2rem;background:#e3f6f9;border-radius:8px;padding:1.2rem;box-shadow:0 1px 6px #0097b233;">
+                    <h3>🔬 Continuous Improvement</h3>
+                    <p>Self-learning engine adapts to new threats and feedback.</p>
+                </div>
+            </div>
+            <div style="margin:2rem 0;text-align:center;">
+                <h2 style="color:#0097b2;">Architecture Graphs</h2>
+                <canvas id="archBarChart" style="max-width:600px;margin:0 auto;"></canvas>
+                <canvas id="archPieChart" style="max-width:400px;margin:2rem auto 0 auto;"></canvas>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                // Bar Chart: Module Distribution
+                const ctxBar = document.getElementById('archBarChart').getContext('2d');
+                new Chart(ctxBar, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Threat Detection','Policy Enforcement','Analytics','Integration','Zero Trust'],
+                        datasets: [{
+                            label: 'Modules',
+                            data: [30, 20, 25, 15, 10],
+                            backgroundColor: '#0097b2',
+                            borderRadius: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true } }
+                    }
+                });
+                // Pie Chart: Resource Allocation
+                const ctxPie = document.getElementById('archPieChart').getContext('2d');
+                new Chart(ctxPie, {
+                    type: 'pie',
+                    data: {
+                        labels: ['AI Engine','Data Storage','Network','User Access','Reporting'],
+                        datasets: [{
+                            label: 'Resources',
+                            data: [35, 20, 15, 20, 10],
+                            backgroundColor: [
+                                '#0097b2', '#00c6ff', '#005f6b', '#e3f6f9', '#fffbe6'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { position: 'bottom' } }
+                    }
+                });
+            </script>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 ZeroShield AI. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
